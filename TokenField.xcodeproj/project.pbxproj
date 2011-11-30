@@ -1,0 +1,293 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3298A7241485C33400871718 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3298A7231485C33400871718 /* Cocoa.framework */; };
+		3298A72E1485C33400871718 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3298A72C1485C33400871718 /* InfoPlist.strings */; };
+		3298A7301485C33400871718 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3298A72F1485C33400871718 /* main.m */; };
+		3298A7341485C33400871718 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 3298A7321485C33400871718 /* Credits.rtf */; };
+		3298A7371485C33400871718 /* MTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3298A7361485C33400871718 /* MTAppDelegate.m */; };
+		3298A73A1485C33400871718 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3298A7381485C33400871718 /* MainMenu.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3298A71F1485C33400871718 /* TokenField.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TokenField.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3298A7231485C33400871718 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		3298A7261485C33400871718 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		3298A7271485C33400871718 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		3298A7281485C33400871718 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3298A72B1485C33400871718 /* TokenField-Info.plist */ = {isa = PBXFileReference; path = "TokenField-Info.plist"; sourceTree = "<group>"; };
+		3298A72D1485C33400871718 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3298A72F1485C33400871718 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3298A7311485C33400871718 /* TokenField-Prefix.pch */ = {isa = PBXFileReference; path = "TokenField-Prefix.pch"; sourceTree = "<group>"; };
+		3298A7331485C33400871718 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		3298A7351485C33400871718 /* MTAppDelegate.h */ = {isa = PBXFileReference; path = MTAppDelegate.h; sourceTree = "<group>"; };
+		3298A7361485C33400871718 /* MTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTAppDelegate.m; sourceTree = "<group>"; };
+		3298A7391485C33400871718 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3298A71C1485C33400871718 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3298A7241485C33400871718 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3298A7141485C33300871718 = {
+			isa = PBXGroup;
+			children = (
+				3298A7291485C33400871718 /* TokenField */,
+				3298A7221485C33400871718 /* Frameworks */,
+				3298A7201485C33400871718 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3298A7201485C33400871718 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3298A71F1485C33400871718 /* TokenField.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3298A7221485C33400871718 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3298A7231485C33400871718 /* Cocoa.framework */,
+				3298A7251485C33400871718 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3298A7251485C33400871718 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3298A7261485C33400871718 /* AppKit.framework */,
+				3298A7271485C33400871718 /* CoreData.framework */,
+				3298A7281485C33400871718 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		3298A7291485C33400871718 /* TokenField */ = {
+			isa = PBXGroup;
+			children = (
+				3298A7351485C33400871718 /* MTAppDelegate.h */,
+				3298A7361485C33400871718 /* MTAppDelegate.m */,
+				3298A7381485C33400871718 /* MainMenu.xib */,
+				3298A72A1485C33400871718 /* Supporting Files */,
+			);
+			path = TokenField;
+			sourceTree = "<group>";
+		};
+		3298A72A1485C33400871718 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3298A72B1485C33400871718 /* TokenField-Info.plist */,
+				3298A72C1485C33400871718 /* InfoPlist.strings */,
+				3298A72F1485C33400871718 /* main.m */,
+				3298A7311485C33400871718 /* TokenField-Prefix.pch */,
+				3298A7321485C33400871718 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3298A71E1485C33400871718 /* TokenField */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3298A73D1485C33400871718 /* Build configuration list for PBXNativeTarget "TokenField" */;
+			buildPhases = (
+				3298A71B1485C33400871718 /* Sources */,
+				3298A71C1485C33400871718 /* Frameworks */,
+				3298A71D1485C33400871718 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TokenField;
+			productName = TokenField;
+			productReference = 3298A71F1485C33400871718 /* TokenField.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3298A7161485C33300871718 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 3298A7191485C33300871718 /* Build configuration list for PBXProject "TokenField" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3298A7141485C33300871718;
+			productRefGroup = 3298A7201485C33400871718 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3298A71E1485C33400871718 /* TokenField */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3298A71D1485C33400871718 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3298A72E1485C33400871718 /* InfoPlist.strings in Resources */,
+				3298A7341485C33400871718 /* Credits.rtf in Resources */,
+				3298A73A1485C33400871718 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3298A71B1485C33400871718 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3298A7301485C33400871718 /* main.m in Sources */,
+				3298A7371485C33400871718 /* MTAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3298A72C1485C33400871718 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3298A72D1485C33400871718 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		3298A7321485C33400871718 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3298A7331485C33400871718 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		3298A7381485C33400871718 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3298A7391485C33400871718 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3298A73B1485C33400871718 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		3298A73C1485C33400871718 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		3298A73E1485C33400871718 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TokenField/TokenField-Prefix.pch";
+				INFOPLIST_FILE = "TokenField/TokenField-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		3298A73F1485C33400871718 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TokenField/TokenField-Prefix.pch";
+				INFOPLIST_FILE = "TokenField/TokenField-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3298A7191485C33300871718 /* Build configuration list for PBXProject "TokenField" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3298A73B1485C33400871718 /* Debug */,
+				3298A73C1485C33400871718 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3298A73D1485C33400871718 /* Build configuration list for PBXNativeTarget "TokenField" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3298A73E1485C33400871718 /* Debug */,
+				3298A73F1485C33400871718 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3298A7161485C33300871718 /* Project object */;
+}
