@@ -13,14 +13,14 @@
 		3298A7341485C33400871718 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 3298A7321485C33400871718 /* Credits.rtf */; };
 		3298A7371485C33400871718 /* MTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3298A7361485C33400871718 /* MTAppDelegate.m */; };
 		3298A73A1485C33400871718 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3298A7381485C33400871718 /* MainMenu.xib */; };
-		329F06E714C7271F0090ECBE /* _MTTokenCompletionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 329F06D714C7271F0090ECBE /* _MTTokenCompletionTableView.m */; };
-		329F06E814C7271F0090ECBE /* _MTTokenCompletionWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 329F06D914C7271F0090ECBE /* _MTTokenCompletionWindow.m */; };
-		329F06E914C7271F0090ECBE /* _MTTokenCompletionWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 329F06DB14C7271F0090ECBE /* _MTTokenCompletionWindowController.m */; };
-		329F06EA14C7271F0090ECBE /* _MTTokenTextAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 329F06DD14C7271F0090ECBE /* _MTTokenTextAttachment.m */; };
-		329F06EB14C7271F0090ECBE /* _MTTokenTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 329F06DF14C7271F0090ECBE /* _MTTokenTextView.m */; };
-		329F06EC14C7271F0090ECBE /* MTTokenField+PrivateMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 329F06E114C7271F0090ECBE /* MTTokenField+PrivateMethods.m */; };
-		329F06ED14C7271F0090ECBE /* MTTokenField.m in Sources */ = {isa = PBXBuildFile; fileRef = 329F06E314C7271F0090ECBE /* MTTokenField.m */; };
-		329F06EE14C7271F0090ECBE /* MTTokenFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 329F06E514C7271F0090ECBE /* MTTokenFieldCell.m */; };
+		329F070A14C736870090ECBE /* _MTTokenCompletionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 329F06FA14C736870090ECBE /* _MTTokenCompletionTableView.m */; };
+		329F070B14C736870090ECBE /* _MTTokenCompletionWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 329F06FC14C736870090ECBE /* _MTTokenCompletionWindow.m */; };
+		329F070C14C736870090ECBE /* _MTTokenCompletionWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 329F06FE14C736870090ECBE /* _MTTokenCompletionWindowController.m */; };
+		329F070D14C736870090ECBE /* _MTTokenTextAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 329F070014C736870090ECBE /* _MTTokenTextAttachment.m */; };
+		329F070E14C736870090ECBE /* _MTTokenTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 329F070214C736870090ECBE /* _MTTokenTextView.m */; };
+		329F070F14C736870090ECBE /* MTTokenField+PrivateMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 329F070414C736870090ECBE /* MTTokenField+PrivateMethods.m */; };
+		329F071014C736870090ECBE /* MTTokenField.m in Sources */ = {isa = PBXBuildFile; fileRef = 329F070614C736870090ECBE /* MTTokenField.m */; };
+		329F071114C736870090ECBE /* MTTokenFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 329F070814C736870090ECBE /* MTTokenFieldCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,23 +37,23 @@
 		3298A7351485C33400871718 /* MTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTAppDelegate.h; sourceTree = "<group>"; };
 		3298A7361485C33400871718 /* MTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTAppDelegate.m; sourceTree = "<group>"; };
 		3298A7391485C33400871718 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		329F06D614C7271F0090ECBE /* _MTTokenCompletionTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _MTTokenCompletionTableView.h; sourceTree = "<group>"; };
-		329F06D714C7271F0090ECBE /* _MTTokenCompletionTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MTTokenCompletionTableView.m; sourceTree = "<group>"; };
-		329F06D814C7271F0090ECBE /* _MTTokenCompletionWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _MTTokenCompletionWindow.h; sourceTree = "<group>"; };
-		329F06D914C7271F0090ECBE /* _MTTokenCompletionWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MTTokenCompletionWindow.m; sourceTree = "<group>"; };
-		329F06DA14C7271F0090ECBE /* _MTTokenCompletionWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _MTTokenCompletionWindowController.h; sourceTree = "<group>"; };
-		329F06DB14C7271F0090ECBE /* _MTTokenCompletionWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MTTokenCompletionWindowController.m; sourceTree = "<group>"; };
-		329F06DC14C7271F0090ECBE /* _MTTokenTextAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _MTTokenTextAttachment.h; sourceTree = "<group>"; };
-		329F06DD14C7271F0090ECBE /* _MTTokenTextAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MTTokenTextAttachment.m; sourceTree = "<group>"; };
-		329F06DE14C7271F0090ECBE /* _MTTokenTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _MTTokenTextView.h; sourceTree = "<group>"; };
-		329F06DF14C7271F0090ECBE /* _MTTokenTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MTTokenTextView.m; sourceTree = "<group>"; };
-		329F06E014C7271F0090ECBE /* MTTokenField+PrivateMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTTokenField+PrivateMethods.h"; sourceTree = "<group>"; };
-		329F06E114C7271F0090ECBE /* MTTokenField+PrivateMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MTTokenField+PrivateMethods.m"; sourceTree = "<group>"; };
-		329F06E214C7271F0090ECBE /* MTTokenField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTTokenField.h; sourceTree = "<group>"; };
-		329F06E314C7271F0090ECBE /* MTTokenField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTTokenField.m; sourceTree = "<group>"; };
-		329F06E414C7271F0090ECBE /* MTTokenFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTTokenFieldCell.h; sourceTree = "<group>"; };
-		329F06E514C7271F0090ECBE /* MTTokenFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTTokenFieldCell.m; sourceTree = "<group>"; };
-		329F06E614C7271F0090ECBE /* MTTokenFieldDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTTokenFieldDelegate.h; sourceTree = "<group>"; };
+		329F06F914C736870090ECBE /* _MTTokenCompletionTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _MTTokenCompletionTableView.h; sourceTree = "<group>"; };
+		329F06FA14C736870090ECBE /* _MTTokenCompletionTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MTTokenCompletionTableView.m; sourceTree = "<group>"; };
+		329F06FB14C736870090ECBE /* _MTTokenCompletionWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _MTTokenCompletionWindow.h; sourceTree = "<group>"; };
+		329F06FC14C736870090ECBE /* _MTTokenCompletionWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MTTokenCompletionWindow.m; sourceTree = "<group>"; };
+		329F06FD14C736870090ECBE /* _MTTokenCompletionWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _MTTokenCompletionWindowController.h; sourceTree = "<group>"; };
+		329F06FE14C736870090ECBE /* _MTTokenCompletionWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MTTokenCompletionWindowController.m; sourceTree = "<group>"; };
+		329F06FF14C736870090ECBE /* _MTTokenTextAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _MTTokenTextAttachment.h; sourceTree = "<group>"; };
+		329F070014C736870090ECBE /* _MTTokenTextAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MTTokenTextAttachment.m; sourceTree = "<group>"; };
+		329F070114C736870090ECBE /* _MTTokenTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _MTTokenTextView.h; sourceTree = "<group>"; };
+		329F070214C736870090ECBE /* _MTTokenTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MTTokenTextView.m; sourceTree = "<group>"; };
+		329F070314C736870090ECBE /* MTTokenField+PrivateMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTTokenField+PrivateMethods.h"; sourceTree = "<group>"; };
+		329F070414C736870090ECBE /* MTTokenField+PrivateMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MTTokenField+PrivateMethods.m"; sourceTree = "<group>"; };
+		329F070514C736870090ECBE /* MTTokenField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTTokenField.h; sourceTree = "<group>"; };
+		329F070614C736870090ECBE /* MTTokenField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTTokenField.m; sourceTree = "<group>"; };
+		329F070714C736870090ECBE /* MTTokenFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTTokenFieldCell.h; sourceTree = "<group>"; };
+		329F070814C736870090ECBE /* MTTokenFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTTokenFieldCell.m; sourceTree = "<group>"; };
+		329F070914C736870090ECBE /* MTTokenFieldDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTTokenFieldDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +107,7 @@
 		3298A7291485C33400871718 /* TokenField */ = {
 			isa = PBXGroup;
 			children = (
-				329F06D514C7271F0090ECBE /* MTTokenField */,
+				329F06F814C736870090ECBE /* MTTokenField */,
 				3298A7351485C33400871718 /* MTAppDelegate.h */,
 				3298A7381485C33400871718 /* MainMenu.xib */,
 				3298A7361485C33400871718 /* MTAppDelegate.m */,
@@ -128,29 +128,28 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		329F06D514C7271F0090ECBE /* MTTokenField */ = {
+		329F06F814C736870090ECBE /* MTTokenField */ = {
 			isa = PBXGroup;
 			children = (
-				329F06D614C7271F0090ECBE /* _MTTokenCompletionTableView.h */,
-				329F06D714C7271F0090ECBE /* _MTTokenCompletionTableView.m */,
-				329F06D814C7271F0090ECBE /* _MTTokenCompletionWindow.h */,
-				329F06D914C7271F0090ECBE /* _MTTokenCompletionWindow.m */,
-				329F06DA14C7271F0090ECBE /* _MTTokenCompletionWindowController.h */,
-				329F06DB14C7271F0090ECBE /* _MTTokenCompletionWindowController.m */,
-				329F06DC14C7271F0090ECBE /* _MTTokenTextAttachment.h */,
-				329F06DD14C7271F0090ECBE /* _MTTokenTextAttachment.m */,
-				329F06DE14C7271F0090ECBE /* _MTTokenTextView.h */,
-				329F06DF14C7271F0090ECBE /* _MTTokenTextView.m */,
-				329F06E014C7271F0090ECBE /* MTTokenField+PrivateMethods.h */,
-				329F06E114C7271F0090ECBE /* MTTokenField+PrivateMethods.m */,
-				329F06E214C7271F0090ECBE /* MTTokenField.h */,
-				329F06E314C7271F0090ECBE /* MTTokenField.m */,
-				329F06E414C7271F0090ECBE /* MTTokenFieldCell.h */,
-				329F06E514C7271F0090ECBE /* MTTokenFieldCell.m */,
-				329F06E614C7271F0090ECBE /* MTTokenFieldDelegate.h */,
+				329F06F914C736870090ECBE /* _MTTokenCompletionTableView.h */,
+				329F06FA14C736870090ECBE /* _MTTokenCompletionTableView.m */,
+				329F06FB14C736870090ECBE /* _MTTokenCompletionWindow.h */,
+				329F06FC14C736870090ECBE /* _MTTokenCompletionWindow.m */,
+				329F06FD14C736870090ECBE /* _MTTokenCompletionWindowController.h */,
+				329F06FE14C736870090ECBE /* _MTTokenCompletionWindowController.m */,
+				329F06FF14C736870090ECBE /* _MTTokenTextAttachment.h */,
+				329F070014C736870090ECBE /* _MTTokenTextAttachment.m */,
+				329F070114C736870090ECBE /* _MTTokenTextView.h */,
+				329F070214C736870090ECBE /* _MTTokenTextView.m */,
+				329F070314C736870090ECBE /* MTTokenField+PrivateMethods.h */,
+				329F070414C736870090ECBE /* MTTokenField+PrivateMethods.m */,
+				329F070514C736870090ECBE /* MTTokenField.h */,
+				329F070614C736870090ECBE /* MTTokenField.m */,
+				329F070714C736870090ECBE /* MTTokenFieldCell.h */,
+				329F070814C736870090ECBE /* MTTokenFieldCell.m */,
+				329F070914C736870090ECBE /* MTTokenFieldDelegate.h */,
 			);
-			name = MTTokenField;
-			path = ../../MailTags/LionTrunk/MT_3_Items/MTTokenField;
+			path = MTTokenField;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,14 +217,14 @@
 			files = (
 				3298A7301485C33400871718 /* main.m in Sources */,
 				3298A7371485C33400871718 /* MTAppDelegate.m in Sources */,
-				329F06E714C7271F0090ECBE /* _MTTokenCompletionTableView.m in Sources */,
-				329F06E814C7271F0090ECBE /* _MTTokenCompletionWindow.m in Sources */,
-				329F06E914C7271F0090ECBE /* _MTTokenCompletionWindowController.m in Sources */,
-				329F06EA14C7271F0090ECBE /* _MTTokenTextAttachment.m in Sources */,
-				329F06EB14C7271F0090ECBE /* _MTTokenTextView.m in Sources */,
-				329F06EC14C7271F0090ECBE /* MTTokenField+PrivateMethods.m in Sources */,
-				329F06ED14C7271F0090ECBE /* MTTokenField.m in Sources */,
-				329F06EE14C7271F0090ECBE /* MTTokenFieldCell.m in Sources */,
+				329F070A14C736870090ECBE /* _MTTokenCompletionTableView.m in Sources */,
+				329F070B14C736870090ECBE /* _MTTokenCompletionWindow.m in Sources */,
+				329F070C14C736870090ECBE /* _MTTokenCompletionWindowController.m in Sources */,
+				329F070D14C736870090ECBE /* _MTTokenTextAttachment.m in Sources */,
+				329F070E14C736870090ECBE /* _MTTokenTextView.m in Sources */,
+				329F070F14C736870090ECBE /* MTTokenField+PrivateMethods.m in Sources */,
+				329F071014C736870090ECBE /* MTTokenField.m in Sources */,
+				329F071114C736870090ECBE /* MTTokenFieldCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
