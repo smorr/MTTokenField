@@ -1,0 +1,16 @@
+##MTTokenField
+
+MTTokenField is a replacement for NSTokenField to allow for better completion handling for stems that do not necessarily occur at the beginning of the completion options.
+
+It was developed to better handle the problem of users employing non alphanumeric symbols or emoji as the leading character.
+
+When I set the NSTokenField delegate to return completions that ignore leading symbols, the selection in the tokenfield behaves in such a way it make it difficult to continue typing for the autocompletion.
+
+MTTokenfield handles this better.
+
+
+###Caveat
+
+This is still an incomplete implementation.
+
+It doesn't handle drag and drop, copying the token array, rendering of tokens in a selected state etc.
