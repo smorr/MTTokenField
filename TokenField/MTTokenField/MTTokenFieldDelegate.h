@@ -20,5 +20,7 @@
 
 -(BOOL)tokenField:(MTTokenField *) tokenField shouldAddToken:(NSString *)token atIndex:(NSUInteger)index;
 
+-(NSMenu*)tokenField:(MTTokenField *)tokenField menuForToken:(NSString*) string atIndex:(NSUInteger) index;
+
 
 @end

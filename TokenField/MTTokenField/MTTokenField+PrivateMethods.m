@@ -47,11 +47,21 @@
 }
 -(void)textView:(_MTTokenTextView*)textView didChangeTokens:(NSArray*)tokens{
     if ([[self delegate] respondsToSelector:@selector(tokenField:willChangeTokens:)]){
-        [(id <MTTokenFieldDelegate>)[self delegate] tokenField:self willChangeTokens:tokens];
+        [[self delegate] performSelector:@selector(tokenField:willChangeTokens:) withObject:self withObject:tokens];
+     
     }
     [self _setTokenArray:tokens];
     if ([[self delegate] respondsToSelector:@selector(tokenField:didChangeTokens:)]){
-        [(id <MTTokenFieldDelegate>)[self delegate] tokenField:self didChangeTokens:tokens];
+        [[self delegate] performSelector:@selector(tokenField:didChangeTokens:) withObject:self withObject:tokens];
     }
 }
+
+-(NSMenu*)textView:(NSTextView *)aTextView menuForToken:(NSString*) string atIndex:(NSUInteger) index{
+    if ([[self delegate] respondsToSelector:@selector(tokenField:menuForToken:atIndex:)]){
+        return [(id <MTTokenFieldDelegate>) [self delegate] tokenField:self menuForToken:(NSString*) string atIndex:(NSUInteger) index];
+    }
+    return nil;
+    
+}
+
 @end

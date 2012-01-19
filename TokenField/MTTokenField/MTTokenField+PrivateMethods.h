@@ -11,5 +11,6 @@
 @interface MTTokenField (PrivateMethods)
 -(BOOL)shouldAddToken:(NSString*)token atTokenIndex:(NSUInteger)index;
 -(void)textView:(_MTTokenTextView*)textView didChangeTokens:(NSArray*)tokens;
+-(NSMenu*)textView:(NSTextView *)aTextView menuForToken:(NSString*) string atIndex:(NSUInteger) index;
 -(void)_setTokenArray:(NSArray*)tokenArray;
 @end

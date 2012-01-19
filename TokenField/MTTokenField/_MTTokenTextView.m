@@ -10,6 +10,8 @@
 #import "MTTokenField.h"
 #import "_MTTokenCompletionWindowController.h"
 #import "_MTTokenTextAttachment.h"
+#import "MTTokenField+PrivateMethods.h"
+#import "NSAttributedString+MTTokenField.h"
 
 @interface _MTTokenTextView(private)
 -(MTTokenField*)delegate;
@@ -80,21 +82,7 @@
 }
 
 -(NSUInteger)countOfTokensInRange:(NSRange)aRange{
-    if (aRange.location ==0) return 0;
-    NSUInteger count = 0;
-    
-    NSRange curRange = NSMakeRange(aRange.location+aRange.length-1,0);
-    
-    while (curRange.location!=NSNotFound && curRange.location>=aRange.location ){
-        if (curRange.location < [[self textStorage] length]){
-            id attribute= [[self textStorage] attribute:NSAttachmentAttributeName atIndex:curRange.location effectiveRange:&curRange];
-            if (attribute) count++;
-        }
-        curRange = NSMakeRange(curRange.location>0?curRange.location-1:NSNotFound, 0);
-    }
-    return count;
-
-    
+    return [[self textStorage] countOfMTTokensInRange:aRange];
 }
 -(NSRange)completionRange{
     NSRange effectiveRange =[self selectedRange];
@@ -359,6 +347,25 @@
     [super doCommandBySelector:aSelector];
 }
 
+-(NSMenu*)menuForEvent:(NSEvent*)theEvent{
+    if ([theEvent type] == NSRightMouseDown){
+        NSPoint pos = [self convertPoint:[theEvent  locationInWindow]
+                                    fromView:nil];
+        NSUInteger glyphIndex = [[self layoutManager] glyphIndexForPoint:pos inTextContainer:[self textContainer]];
+        
+        NSUInteger charIndex = [[self layoutManager] characterIndexForGlyphAtIndex:glyphIndex];
+        _MTTokenTextAttachment* attribute = [[self textStorage] attribute:NSAttachmentAttributeName atIndex:charIndex effectiveRange:nil];
+        if (attribute && [attribute isKindOfClass:[_MTTokenTextAttachment class]]) {
+            NSUInteger tokenIndex = [self countOfTokensInRange:NSMakeRange(0,charIndex)];
+            NSMenu * menu = [[self delegate] textView:self menuForToken:[(_MTTokenTextAttachmentCell*)[attribute attachmentCell] tokenTitle] atIndex:tokenIndex];
+            return menu;
+        }
+    }
+    return [super menuForEvent:theEvent];
+}
 
+-(void)mouseDown:(NSEvent*)theEvent{
+    [super mouseDown:theEvent];
+}
 
 @end

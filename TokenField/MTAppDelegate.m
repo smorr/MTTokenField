@@ -24,6 +24,7 @@
 {
     self.tokensForCompletion = [NSMutableArray arrayWithObjects:@"A very long keyword",@"Änger",@"Blatt",@"test",@"tiara",@"typhoon",@"trick",@"trigger",@"🕚tiger",@"@tickle",@"@waiting",@"@Followup",@"Walrus", nil];  
     
+    [self.myTokenField setTokenArray:[NSArray arrayWithObject:@"test"]];
     
     [self.tableView reloadData];
         
@@ -40,25 +41,25 @@
     return [self.tokensForCompletion  objectAtIndex:row];
 }
 
-
-- (NSArray *)tokenField:(NSTokenField *)tokenField completionsForSubstring:(NSString *)substring indexOfToken:(NSInteger)tokenIndex indexOfSelectedItem:(NSInteger *)selectedIndex{
-    return [self tokenField:tokenField completionsForSubstring:substring];
-}
-- (NSArray *)tokenField:(MTTokenField *)tokenField completionsForSubstring:(NSString *)substring 
+- (NSArray *)tokenField:(MTTokenField*)tokenField completionsForSubstring:(NSString *)substring 
 {
     NSArray * testArray = self.tokensForCompletion;
     if (self.option==0){
-        NSMutableArray * keywordsMatchingString = [[[NSMutableArray alloc] init] autorelease];
-        for (NSString *aKeyword in testArray){
-            if ([aKeyword rangeOfString:substring options:NSCaseInsensitiveSearch].location !=NSNotFound){
-                [keywordsMatchingString addObject:aKeyword];  
+        // matching substring to anyportion of the candidate
+        NSMutableArray * matches = [[[NSMutableArray alloc] init] autorelease];
+        for (NSString *candidate in testArray){
+            if ([candidate rangeOfString:substring options:NSCaseInsensitiveSearch].location !=NSNotFound){
+                [matches addObject:candidate];  
             }
         }
-        return keywordsMatchingString;
+        return matches;
         
     }
     else{
-    
+        // matching substring to leading characters of candidate ignoring any non AlphaNumeric characters in candidate
+        // eg
+        // if substring is "ac",   matches will include "@action" and "account" but not "fact"
+        
         NSRange alphaNumericRange = [substring rangeOfCharacterFromSet:[NSCharacterSet alphanumericCharacterSet]];
         NSString * alphaSubstring = @"";
         
@@ -67,33 +68,62 @@
             alphaSubstring = [substring substringFromIndex:alphaNumericRange.location];
         }
         else{
-             alphaSubstring = substring;
+            alphaSubstring = substring;
             searchFullString = YES;
         }
         
-        NSMutableArray * keywordsMatchingString = [[[NSMutableArray alloc] init] autorelease];;
-        for (NSString *aKeyword in testArray){
+        NSMutableArray * matches = [[[NSMutableArray alloc] init] autorelease];;
+        for (NSString *candidate in testArray){
+            // remove any candidate already in use
             if ([tokenField respondsToSelector:@selector(tokenArray)]){
-                if([[tokenField tokenArray] containsObject:aKeyword]) continue;
+                if([[tokenField tokenArray] containsObject:candidate]) continue;
             }
             else{
-                if([[tokenField objectValue] containsObject:aKeyword]) continue;
+                if([[tokenField objectValue] containsObject:candidate]) continue;
             }
             
-            NSRange alphaNumericRange = [aKeyword rangeOfCharacterFromSet:[NSCharacterSet alphanumericCharacterSet]];
+            
+            
+            NSRange alphaNumericRange = [candidate rangeOfCharacterFromSet:[NSCharacterSet alphanumericCharacterSet]];
             if (alphaNumericRange.location!=NSNotFound){
-                NSString * alphaKeyword = searchFullString?aKeyword:[aKeyword substringFromIndex:alphaNumericRange.location];
+                NSString * alphaKeyword = searchFullString?candidate:[candidate substringFromIndex:alphaNumericRange.location];
                 NSRange substringRange = [alphaKeyword rangeOfString:alphaSubstring options:NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch];
                 if (substringRange.location == 0){
-                    [keywordsMatchingString addObject:aKeyword];
+                    [matches addObject:candidate];
                 }
             }
-           
+            
         }
-     
-    return keywordsMatchingString; 
-    }
         
+        return matches; 
+    }
+    
+}
+-(void)action:(id)sender{
+    NSLog(@"You selected Menu Item: %@",sender);
+}
+-(NSMenu*)tokenField:(MTTokenField *)tokenField menuForToken:(NSString*) string atIndex:(NSUInteger) index{
+    NSMenu * test = [[[NSMenu alloc] init] autorelease];
+    NSArray * itemNames = [NSArray arrayWithObjects:@"Cut",@"Copy",@"Paste",@"-", [NSString stringWithFormat:@"Add %@ to preferences",string], nil];
+    for (NSString *aName in itemNames){
+        if ([aName isEqualToString:@"-"]){
+            [test addItem:[NSMenuItem separatorItem]];
+        }
+        else{
+            NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:aName action:@selector(action:) keyEquivalent:@""];
+            [item setTarget:self];
+            [test addItem:item];
+            [item release];
+
+        
+        }
+    }
+    return test;
+}
+
+
+- (NSArray *)tokenField:(NSTokenField *)tokenField completionsForSubstring:(NSString *)substring indexOfToken:(NSInteger)tokenIndex indexOfSelectedItem:(NSInteger *)selectedIndex{
+    return [self tokenField:(id)tokenField completionsForSubstring:substring];
 }
 
 -(IBAction)click:(id)sender{

@@ -21,6 +21,7 @@
 		329F070F14C736870090ECBE /* MTTokenField+PrivateMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 329F070414C736870090ECBE /* MTTokenField+PrivateMethods.m */; };
 		329F071014C736870090ECBE /* MTTokenField.m in Sources */ = {isa = PBXBuildFile; fileRef = 329F070614C736870090ECBE /* MTTokenField.m */; };
 		329F071114C736870090ECBE /* MTTokenFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 329F070814C736870090ECBE /* MTTokenFieldCell.m */; };
+		329F071B14C879D80090ECBE /* NSAttributedString+MTTokenField.m in Sources */ = {isa = PBXBuildFile; fileRef = 329F071A14C879D60090ECBE /* NSAttributedString+MTTokenField.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,8 @@
 		329F070714C736870090ECBE /* MTTokenFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTTokenFieldCell.h; sourceTree = "<group>"; };
 		329F070814C736870090ECBE /* MTTokenFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTTokenFieldCell.m; sourceTree = "<group>"; };
 		329F070914C736870090ECBE /* MTTokenFieldDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTTokenFieldDelegate.h; sourceTree = "<group>"; };
+		329F071914C879D50090ECBE /* NSAttributedString+MTTokenField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+MTTokenField.h"; sourceTree = "<group>"; };
+		329F071A14C879D60090ECBE /* NSAttributedString+MTTokenField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+MTTokenField.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +151,8 @@
 				329F070714C736870090ECBE /* MTTokenFieldCell.h */,
 				329F070814C736870090ECBE /* MTTokenFieldCell.m */,
 				329F070914C736870090ECBE /* MTTokenFieldDelegate.h */,
+				329F071914C879D50090ECBE /* NSAttributedString+MTTokenField.h */,
+				329F071A14C879D60090ECBE /* NSAttributedString+MTTokenField.m */,
 			);
 			path = MTTokenField;
 			sourceTree = "<group>";
@@ -225,6 +230,7 @@
 				329F070F14C736870090ECBE /* MTTokenField+PrivateMethods.m in Sources */,
 				329F071014C736870090ECBE /* MTTokenField.m in Sources */,
 				329F071114C736870090ECBE /* MTTokenFieldCell.m in Sources */,
+				329F071B14C879D80090ECBE /* NSAttributedString+MTTokenField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
