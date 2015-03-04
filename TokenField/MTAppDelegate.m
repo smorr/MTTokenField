@@ -18,7 +18,6 @@
 //  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "MTAppDelegate.h"
-
 @implementation MTAppDelegate
 @synthesize myTokenField;
 @synthesize standardTokenField,tableView;
@@ -113,6 +112,31 @@
 -(void)action:(id)sender{
     NSLog(@"You selected Menu Item: %@",sender);
 }
+
+-(MTTokenStyle)tokenField:(MTTokenField*) tokenField styleForToken:(NSString*) string {
+    if ([string rangeOfString:@"tri"].location!=NSNotFound){
+        return kMTTokenStyleRoundedColor;
+    }
+    if ([string rangeOfString:@"Blatt"].location!=NSNotFound){
+        return kMTTokenStyleRounded;
+    }
+
+    return kMTTokenStyleRectangular;
+}
+
+
+-(NSColor*)tokenField:(MTTokenField *)tokenField colorForToken:(NSString *)string{
+    if ([string rangeOfString:@"test"].location!=NSNotFound){
+        return [NSColor colorWithCalibratedRed:.588 green:0.749 blue:0.929 alpha:1.000];
+    }
+    if ([string rangeOfString:@"trick"].location!=NSNotFound){
+        return [NSColor redColor];
+    }
+    
+        return [NSColor yellowColor];
+
+}
+
 -(NSMenu*)tokenField:(MTTokenField *)tokenField menuForToken:(NSString*) string atIndex:(NSUInteger) index{
     NSMenu * test = [[[NSMenu alloc] init] autorelease];
     NSArray * itemNames = [NSArray arrayWithObjects:@"Cut",@"Copy",@"Paste",@"-", [NSString stringWithFormat:@"Add %@ to preferences",string], nil];

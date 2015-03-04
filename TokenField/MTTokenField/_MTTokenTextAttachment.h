@@ -18,28 +18,24 @@
 //  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import <AppKit/AppKit.h>
+#import "MTTokenFieldDelegate.h"
 
 @interface _MTTokenTextAttachment : NSTextAttachment
-{
-    id representedObject;
-    NSString * title;
-}
+
 
 @property (retain) id representedObject;
 @property (copy) NSString * title;
+@property (retain) NSColor * color;
+@property (assign) MTTokenStyle  style;
 
 -(id)initWithTitle:(NSString*)aTitle;
 
 @end
 
 
-@interface _MTTokenTextAttachmentCell :NSTextAttachmentCell{
-	NSImage * alternateImage;
-	NSString * tokenTitle;
-	BOOL selected;
-    NSColor * color;
-}
+@interface _MTTokenTextAttachmentCell :NSTextAttachmentCell
+
 @property (retain) NSString *tokenTitle;
-@property (retain) NSColor * color;
 @property (assign) BOOL selected;
+
 @end

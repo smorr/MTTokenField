@@ -33,8 +33,21 @@
 
 -(NSAttributedString*)tokenForString:(NSString*)aString{	
 	_MTTokenTextAttachment * ta = [[_MTTokenTextAttachment alloc] initWithTitle:aString ];
-	
+    
     NSMutableAttributedString*  as = [[NSMutableAttributedString alloc] initWithAttributedString:[NSAttributedString attributedStringWithAttachment:ta]];
+    
+    MTTokenField * controlView = (MTTokenField *)[self delegate];
+    if ([controlView respondsToSelector:@selector(delegate)]){
+        id <MTTokenFieldDelegate> controlViewDelegate = (id <MTTokenFieldDelegate>)[controlView delegate];
+        if ([controlViewDelegate respondsToSelector:@selector(tokenField:colorForToken:)]){
+            ta.color = [controlViewDelegate tokenField:controlView colorForToken:aString ];
+         }
+        if ([controlViewDelegate respondsToSelector:@selector(tokenField:styleForToken:)]){
+            ta.style = [controlViewDelegate tokenField:controlView styleForToken:aString ];
+        }
+
+    }
+    
     [as addAttribute:NSAttachmentAttributeName value:ta range:NSMakeRange(0, [as length])];
 	[as addAttribute:NSBaselineOffsetAttributeName value:[NSNumber numberWithInt:0] range:NSMakeRange(0, [as length])];
 	[ta release];

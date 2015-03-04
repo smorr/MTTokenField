@@ -27,10 +27,17 @@
         tokenArray_= [tokenArray retain];
         NSMutableAttributedString * attributedString = [[NSMutableAttributedString alloc] init];
         
-        for (id atoken in tokenArray){
+        [tokenArray enumerateObjectsUsingBlock:^(NSString* aToken, NSUInteger idx, BOOL *stop) {
             
-            _MTTokenTextAttachment * ta = [[_MTTokenTextAttachment alloc] initWithTitle:atoken ];
+            _MTTokenTextAttachment * ta = [[_MTTokenTextAttachment alloc] initWithTitle:aToken ];
             
+            if ([self.delegate respondsToSelector:@selector(tokenField:colorForToken:)]){
+                ta.color = [(id <MTTokenFieldDelegate>)self.delegate tokenField:self colorForToken:aToken];
+            }
+            if ([self.delegate respondsToSelector:@selector(tokenField:styleForToken:)]){
+                ta.style = [(id <MTTokenFieldDelegate>)self.delegate tokenField:self styleForToken:aToken];
+            }
+                 
             NSMutableAttributedString*  tokenString = [[NSMutableAttributedString alloc] initWithAttributedString:[NSAttributedString attributedStringWithAttachment:ta]];
             [tokenString addAttribute:NSBaselineOffsetAttributeName value:[NSNumber numberWithInt:0] range:NSMakeRange(0, [tokenString length])];
             
@@ -42,7 +49,8 @@
             [attributedString appendAttributedString:tokenString];
             [tokenString release];
             [self setNeedsDisplay:YES];
-        }
+        }];
+                
         [self setAttributedStringValue:attributedString];
         [attributedString release];
         [oldArray release];

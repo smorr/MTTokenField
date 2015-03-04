@@ -20,6 +20,12 @@
 #import <Foundation/Foundation.h>
 @class MTTokenField;
 
+typedef NS_ENUM(NSUInteger, MTTokenStyle) {
+    kMTTokenStyleRounded = 0,
+    kMTTokenStyleRectangular = 1,
+    kMTTokenStyleRoundedColor = 2
+};
+
 @protocol MTTokenFieldDelegate <NSObject,NSTextFieldDelegate>
 @optional
 
@@ -32,6 +38,11 @@
 -(BOOL)tokenField:(MTTokenField *) tokenField shouldAddToken:(NSString *)token atIndex:(NSUInteger)index;
 
 -(NSMenu*)tokenField:(MTTokenField *)tokenField menuForToken:(NSString*) string atIndex:(NSUInteger) index;
+
+-(NSColor*)tokenField:(MTTokenField*) tokenField colorForToken:(NSString*) string;
+
+-(MTTokenStyle)tokenField:(MTTokenField*) tokenField styleForToken:(NSString*) string ;
+
 
 
 @end
