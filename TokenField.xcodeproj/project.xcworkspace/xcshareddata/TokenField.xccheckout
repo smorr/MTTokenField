@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>AB2F8220-92BE-4E9F-A065-2EB2B162D4F9</string>
+	<key>IDESourceControlProjectName</key>
+	<string>TokenField</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>E74141674E4B3DE4F04C7EFE0EBE771A197A02C0</key>
+		<string>https://github.com/smorr/MTTokenField.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>TokenField.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>E74141674E4B3DE4F04C7EFE0EBE771A197A02C0</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/smorr/MTTokenField.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>E74141674E4B3DE4F04C7EFE0EBE771A197A02C0</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E74141674E4B3DE4F04C7EFE0EBE771A197A02C0</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MTTokenField</string>
+		</dict>
+	</array>
+</dict>
+</plist>
