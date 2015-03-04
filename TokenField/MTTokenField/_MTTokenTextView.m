@@ -96,6 +96,8 @@
     return [[self textStorage] countOfMTTokensInRange:aRange];
 }
 -(NSRange)completionRange{
+    
+    
     NSRange effectiveRange =[self selectedRange];
     // scan backwards looking for the first attachment (ie token)
     while (effectiveRange.location !=NSNotFound && effectiveRange.location>0){
@@ -110,6 +112,13 @@
         effectiveRange.location=0;
     }
     effectiveRange.length = [self selectedRange].location-effectiveRange.location;
+    if ([self hasMarkedText]){
+        // adjustment if their is marked text (dead keys etc) in string
+        NSRange markedRange =[self markedRange];
+        if (markedRange.location !=NSNotFound){
+            effectiveRange.length = markedRange.location - effectiveRange.location;
+        }
+     }
     return effectiveRange;
  }
 
@@ -157,6 +166,27 @@
     }
     
 }
+-(void)removeTokenForText:(NSString*)tokenText{
+    BOOL changed = NO;
+    if ([[self textStorage] length]){
+        NSRange curRange = NSMakeRange([[self textStorage] length]-1,0);
+        while (curRange.location!=NSNotFound ){
+            id attribute= [[self textStorage] attribute:NSAttachmentAttributeName atIndex:curRange.location effectiveRange:&curRange];
+            if (attribute && [[attribute  title] isEqualToString:tokenText]){
+                [[self textStorage] replaceCharactersInRange:curRange withString:@""];
+                changed = YES;
+            }
+            curRange = NSMakeRange(curRange.location>0?curRange.location-1:NSNotFound, 0);
+        }
+        
+    }
+    if (changed){
+        [(MTTokenField*)[self delegate] textView:self didChangeTokens: [self tokenArray]];
+
+    }
+}
+
+
 -(void) insertTokenForText:(NSString*)tokenText replacementRange:(NSRange)replacementRange{
     if ([(MTTokenField*)[self delegate] shouldAddToken: tokenText atTokenIndex:[self countOfTokensInRange:NSMakeRange(0,replacementRange.location)] ]){
         NSAttributedString *insertionText = [self tokenForString:tokenText];
@@ -175,6 +205,13 @@
     }
     
 }
+
+
+- (void)setMarkedText:(id)aString selectedRange:(NSRange)selectedRange replacementRange:(NSRange)replacementRange{
+    [super setMarkedText:aString selectedRange:selectedRange replacementRange:replacementRange];
+}
+
+
 -(void)insertText:(id)aString{
     if ([[_MTTokenCompletionWindowController sharedController] isDisplayingCompletions]){
         [super insertText:aString];
@@ -316,8 +353,9 @@
         
     }
     if (aSelector   == @selector(moveLeft:)){
-        if ([self selectedRange].location>0){
-            if ([[self textStorage] attribute:NSAttachmentAttributeName atIndex:[self selectedRange].location-1 effectiveRange:nil]){
+        NSRange selRange = [self selectedRange];
+        if (selRange.location>0 && selRange.location<[[self textStorage] length]){
+            if ([[self textStorage] attribute:NSAttachmentAttributeName atIndex:selRange.location-1 effectiveRange:nil]){
                 NSRange completionRange = [self forwardCompletionRange];
                 if (completionRange.length>0){
                     NSString *string = [[[self textStorage] string] substringWithRange:completionRange];
@@ -363,13 +401,16 @@
         NSPoint pos = [self convertPoint:[theEvent  locationInWindow]
                                     fromView:nil];
         NSUInteger glyphIndex = [[self layoutManager] glyphIndexForPoint:pos inTextContainer:[self textContainer]];
-        
-        NSUInteger charIndex = [[self layoutManager] characterIndexForGlyphAtIndex:glyphIndex];
-        _MTTokenTextAttachment* attribute = [[self textStorage] attribute:NSAttachmentAttributeName atIndex:charIndex effectiveRange:nil];
-        if (attribute && [attribute isKindOfClass:[_MTTokenTextAttachment class]]) {
-            NSUInteger tokenIndex = [self countOfTokensInRange:NSMakeRange(0,charIndex)];
-            NSMenu * menu = [[self delegate] textView:self menuForToken:[(_MTTokenTextAttachmentCell*)[attribute attachmentCell] tokenTitle] atIndex:tokenIndex];
-            return menu;
+        if (glyphIndex !=NSNotFound){
+            NSUInteger charIndex = [[self layoutManager] characterIndexForGlyphAtIndex:glyphIndex];
+            if (charIndex !=NSNotFound){
+                _MTTokenTextAttachment* attribute = [[self textStorage] attribute:NSAttachmentAttributeName atIndex:charIndex effectiveRange:nil];
+                if (attribute && [attribute isKindOfClass:[_MTTokenTextAttachment class]]) {
+                    NSUInteger tokenIndex = [self countOfTokensInRange:NSMakeRange(0,charIndex)];
+                    NSMenu * menu = [[self delegate] textView:self menuForToken:[(_MTTokenTextAttachmentCell*)[attribute attachmentCell] tokenTitle] atIndex:tokenIndex];
+                    return menu;
+                }
+            }
         }
     }
     return [super menuForEvent:theEvent];

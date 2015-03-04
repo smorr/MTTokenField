@@ -22,6 +22,7 @@
 #import "_MTTokenCompletionTableView.h"
 #import "_MTTokenTextAttachment.h"
 #import "_MTTokenTextView.h"
+
 static _MTTokenCompletionWindowController* sharedController = nil;
 
 @implementation _MTTokenCompletionWindowController
@@ -61,10 +62,10 @@ static _MTTokenCompletionWindowController* sharedController = nil;
 - (void) setupWindow{
 	NSRect scrollFrame = NSMakeRect(0, 0, 200, 100);
     NSRect tableFrame = NSZeroRect;    
-    tableFrame.size = [NSScrollView contentSizeForFrameSize:scrollFrame.size hasHorizontalScroller:NO hasVerticalScroller:YES borderType:NSNoBorder];
+    tableFrame.size = NSMakeSize(0,0);
        
     
-    completionWindow = [[_MTTokenCompletionWindow alloc] initWithContentRect:scrollFrame styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
+    completionWindow = [[NSWindow alloc] initWithContentRect:scrollFrame styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
 	[completionWindow setWindowController:self];
 	[self setWindow:completionWindow];
     [completionWindow setAlphaValue:.85];
@@ -78,7 +79,8 @@ static _MTTokenCompletionWindowController* sharedController = nil;
     [tableView setAutoresizingMask:NSViewWidthSizable];
     
     NSTableColumn *column = [[NSTableColumn alloc] initWithIdentifier:@"completions"];
-    [column setWidth:tableFrame.size.width];[column setEditable:NO];
+    [column setWidth:scrollFrame.size.width];
+    [column setEditable:NO];
     [tableView addTableColumn:column];
     [column release];
     
@@ -129,17 +131,20 @@ static _MTTokenCompletionWindowController* sharedController = nil;
     NSRange replacementRange = NSMakeRange(self.completionIndex, [aTextView selectedRange].location-self.completionIndex+ [aTextView selectedRange].length);
     NSString *insertionText = completion;
     NSRange stemRangeInCompletion= [insertionText rangeOfString:self.completionStem options:NSCaseInsensitiveSearch];
-    NSAttributedString * commpletionAttrString = [[NSAttributedString alloc] initWithString:completion attributes:[aTextView typingAttributes]];
-    [[aTextView textStorage] replaceCharactersInRange:replacementRange withAttributedString:commpletionAttrString];
+    NSAttributedString * completionAttrString = [[NSAttributedString alloc] initWithString:completion attributes:[aTextView typingAttributes]];
+    [[aTextView textStorage] replaceCharactersInRange:replacementRange withAttributedString:completionAttrString];
+    [completionAttrString release];
     if (stemRangeInCompletion.location !=NSNotFound){
         NSUInteger selectionStart = self.completionIndex+stemRangeInCompletion.location+[self.completionStem length];
         NSUInteger selectionLength = [insertionText length] -stemRangeInCompletion.location-[self.completionStem length];
         NSRange newselection = NSMakeRange(selectionStart,selectionLength);
         [aTextView setSelectedRange:newselection];
     }
-    NSPoint windowPoint= [aTextView convertPoint:[aTextView frame].origin toView:nil];
-    NSPoint screenPoint = [[aTextView window] convertBaseToScreen:windowPoint];
-
+    __unused NSPoint windowPoint= [aTextView convertPoint:[aTextView frame].origin toView:nil];
+    
+    
+    //NSPoint screenPoint = [[aTextView window] convertBaseToScreen:windowPoint];
+    NSPoint screenPoint = NSMakePoint(0,0);
     NSRange actualRange;
     NSRange glyphRange = [[aTextView layoutManager] glyphRangeForCharacterRange:NSMakeRange(self.completionIndex,[completion length]) actualCharacterRange:&actualRange];
     NSRect r = [[aTextView layoutManager] boundingRectForGlyphRange:glyphRange inTextContainer:[aTextView textContainer]];
@@ -159,8 +164,23 @@ static _MTTokenCompletionWindowController* sharedController = nil;
        [self setupWindow];
        [self.tableView reloadData];
    
+        NSRect rect = [aTextView firstRectForCharacterRange:[aTextView selectedRange] actualRange:nil];
+        rect.origin.y -=5;
+        __block CGFloat screenMaxX = 0.0;
+        [[NSScreen screens] enumerateObjectsUsingBlock:^(NSScreen* aScreen, NSUInteger idx, BOOL *stop) {
+            if (NSPointInRect(rect.origin,[aScreen visibleFrame])){
+                *stop = YES;
+                screenMaxX = NSMaxX([aScreen visibleFrame]);
+            }
+        }];
         
-       
+        rect.origin.x = MIN(rect.origin.x,screenMaxX-NSWidth([completionWindow frame]));
+        [completionWindow setFrameTopLeftPoint:rect.origin];
+        
+        [completionWindow orderFrontRegardless];
+        [[self.textView window] addChildWindow:completionWindow ordered:NSWindowAbove];
+
+        [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
         NSString *insertionText =  [self.completionsArray count]?[self.completionsArray objectAtIndex:0]:self.completionStem;
      
         [self displayCompletion:insertionText inTextView:textView];
@@ -176,7 +196,16 @@ static _MTTokenCompletionWindowController* sharedController = nil;
                     [blockself tearDownWindow];
                     return theEvent;
                 }
-                if ([theEvent keyCode]==0x24 ){
+                if ([theEvent keyCode]==0x30 /*tab*/){
+                    NSInteger selectedRow = [self.tableView selectedRow];
+                    NSAssert(selectedRow >= 0 && selectedRow < [self.completionsArray count], @"Invalid Selected Row");
+                    [self chooseCompletion:[self.completionsArray objectAtIndex:selectedRow] forTextView:self.textView];
+                    [self tearDownWindow];
+                    [[self.textView window] sendEvent:theEvent];
+                    return nil;
+ 
+                }
+                if ([theEvent keyCode]==0x24 /*return*/  || [theEvent keyCode] == 0x4C /*enter*/){
                     NSInteger selectedRow = [self.tableView selectedRow];
                     NSAssert(selectedRow >= 0 && selectedRow < [self.completionsArray count], @"Invalid Selected Row");
                     [self chooseCompletion:[self.completionsArray objectAtIndex:selectedRow] forTextView:self.textView];
@@ -339,5 +368,7 @@ static _MTTokenCompletionWindowController* sharedController = nil;
     [self tearDownWindow];
    
 }
-
+- (void)tableAction:(id)sender{
+    
+}
 @end

@@ -52,12 +52,13 @@
 @implementation _MTTokenTextAttachmentCell
 @synthesize tokenTitle;
 @synthesize selected;
-
+@synthesize color;
 
 -(void)dealloc{
     self.tokenTitle = nil;
     [alternateImage release];
     alternateImage = nil;
+    self.color = nil;
     
     [super dealloc];
     
@@ -74,20 +75,24 @@
 -(id)copyWithZone:(NSZone *)zone{
     return [self retain];
 }
--(NSImage *) image{
+
+
+-(NSImage*)standardTokenImage{
     static NSDictionary * _fontAttibutes = nil;
     if (!_fontAttibutes) _fontAttibutes = [[NSDictionary alloc] initWithObjectsAndKeys:[NSFont systemFontOfSize:11],NSFontAttributeName, nil];
 	
-	NSAttributedString * attributedString = [[NSAttributedString alloc] initWithString:self.tokenTitle attributes:_fontAttibutes];
+	NSAttributedString * attributedString = [[[NSAttributedString alloc] initWithString:self.tokenTitle attributes:_fontAttibutes] autorelease];
     if (!attributedString)  return nil;
-    NSSize imgSize =NSMakeSize([attributedString size].width+36, [attributedString size].height+0);
+    CGFloat w = 19;
+    
+    NSSize imgSize =NSMakeSize([attributedString size].width+w+5, [attributedString size].height+0);
     if (imgSize.width==0 || imgSize.height==0)
         return nil;
     
 	NSImage * image = [[[NSImage alloc] initWithSize:imgSize] autorelease];
 	[image lockFocus];
 	
-    NSRect pathRect = NSMakeRect(2, 1, [attributedString size].width+31, [attributedString size].height-2);
+    NSRect pathRect = NSMakeRect(2, 1, [attributedString size].width+w, [attributedString size].height-2);
 	CGFloat radius = 6;
     NSBezierPath * path = [NSBezierPath bezierPath];
 	
@@ -98,27 +103,27 @@
 	CGFloat midY		= NSMidY(pathRect);
     CGFloat midX		= NSMidX(pathRect);
     
-	// bottom right curve and bottom edge 
+	// bottom right curve and bottom edge
     [path moveToPoint: NSMakePoint(midX, minimumY)];
     [path appendBezierPathWithArcFromPoint: NSMakePoint(maximumX, minimumY) toPoint: NSMakePoint(maximumX, midY) radius: radius-.5];
     
-	// top right curve and right edge 
+	// top right curve and right edge
     [path appendBezierPathWithArcFromPoint: NSMakePoint(maximumX, maximumY) toPoint: NSMakePoint(midX, maximumY) radius: radius-.5];
     
 	// top left curve and top edge
     [path appendBezierPathWithArcFromPoint: NSMakePoint(minimumX, maximumY) toPoint: NSMakePoint(minimumX, midY) radius: radius];
     
-	// bottom left curve and left edge 
+	// bottom left curve and left edge
     [path appendBezierPathWithArcFromPoint: NSMakePoint(minimumX, minimumY) toPoint: NSMakePoint(midX, minimumY) radius: radius];
     [path closePath];
-
+    
     
     
     [path setLineWidth:1.0];
 	if (self.selected)
 		[[NSColor colorWithCalibratedRed:0.671 green:0.706 blue:0.773 alpha:1.000] set];
 	else {
-		[[NSColor colorWithCalibratedRed:0.851 green:0.906 blue:0.973 alpha:1.000] set];	
+		[[NSColor colorWithCalibratedRed:0.851 green:0.906 blue:0.973 alpha:1.000] set];
 	}
     
 	[path fill];
@@ -126,11 +131,15 @@
 	[path stroke];
 	[[NSColor colorWithCalibratedRed:1.0f green:1.0f blue:1.0f alpha:1.0]set];
     
-    [attributedString drawInRect:NSMakeRect(17, 0, [attributedString size].width+10, [attributedString size].height)];
-	[attributedString release];
-	[image unlockFocus];
+    [attributedString drawInRect:NSMakeRect(11, 0, [attributedString size].width+10, [attributedString size].height)];
+    [image unlockFocus];
 	
 	return image;
 }
+
+-(NSImage *) image{
+    return [self standardTokenImage];
+}
+
 
 @end

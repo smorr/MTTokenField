@@ -19,7 +19,6 @@
 
 #import "MTTokenField+PrivateMethods.h"
 #import "_MTTokenTextAttachment.h"
-
 @implementation MTTokenField (PrivateMethods)
 
 -(void)_setTokenArray:(NSArray*)tokenArray{

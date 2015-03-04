@@ -43,5 +43,6 @@
 -(void)displayCompletionsForStem:(NSString*) stem forTextView:(NSTextView*)aTextView forRange:(NSRange)stemRange;
 -(void)tearDownWindow;
 -(BOOL)isDisplayingCompletions;
+- (void)tableAction:(id)sender;
 
 @end

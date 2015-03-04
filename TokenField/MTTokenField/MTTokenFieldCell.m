@@ -34,10 +34,12 @@
 
 - (_MTTokenTextView *)fieldEditorForView:(NSView *)aControlView{
     static _MTTokenTextView * tokenTextView = nil;
-    if (!tokenTextView){
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
         tokenTextView = [[_MTTokenTextView alloc] init];
         [tokenTextView setFieldEditor:YES];
-    }
+
+    });
     return tokenTextView;
 }
 

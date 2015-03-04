@@ -37,7 +37,9 @@
 	NSImage * alternateImage;
 	NSString * tokenTitle;
 	BOOL selected;
+    NSColor * color;
 }
 @property (retain) NSString *tokenTitle;
+@property (retain) NSColor * color;
 @property (assign) BOOL selected;
 @end

@@ -1,6 +1,7 @@
 //
 //  NSAttributedString+MTTokenField.m
 //  TokenField
+//
 //  Copyright (c) 2012-2015 Indev Software.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated

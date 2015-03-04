@@ -24,6 +24,7 @@
 #import "MTTokenField+PrivateMethods.h"
 #import "MTTokenFieldDelegate.h"
 #import "NSAttributedString+MTTokenField.h"
+
 @implementation MTTokenField
 @dynamic tokenArray;
 @synthesize tokenizingCharacterSet= tokenizingCharacterSet_;
@@ -45,7 +46,7 @@
         [self _setTokenArray: tokenArray];
         
         id fieldEditor = [[self cell] fieldEditorForView:self] ;
-            if ([fieldEditor delegate] == self)
+            if ([fieldEditor delegate] == (id <NSFileManagerDelegate>)self)
                 [(_MTTokenTextView*)[[self cell] fieldEditorForView:self] setTokenArray:tokenArray];
 
     }
@@ -78,7 +79,20 @@
     return YES;
 }
 
-
+-(BOOL)resignFirstResponder{
+    BOOL didResign =  [super resignFirstResponder];
+    if (didResign && [self.delegate respondsToSelector:@selector(controlDidResignFirstResponder:)]){
+        [(id <MTControlTextEditingDelegate>)self.delegate controlDidResignFirstResponder:self];
+    }
+    return didResign;
+}
+-(BOOL)becomeFirstResponder{
+    BOOL didBecome =  [super becomeFirstResponder];
+    if (didBecome &&  [self.delegate respondsToSelector:@selector(controlDidBecomeFirstResponder:)]){
+        [(id <MTControlTextEditingDelegate>)self.delegate controlDidBecomeFirstResponder:self];
+    }
+    return didBecome;
+}
 
 
 -(NSMenu*)menuForEvent:(NSEvent*)theEvent{

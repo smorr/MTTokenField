@@ -21,6 +21,13 @@
 #import "_MTTokenTextView.h"
 #import "MTTokenFieldDelegate.h"
 
+@protocol MTControlTextEditingDelegate <NSControlTextEditingDelegate>
+@optional
+-(void)controlDidResignFirstResponder:(id)aControl;
+-(void)controlDidBecomeFirstResponder:(id)aControl;
+@end
+
+
 @interface MTTokenField : NSTextField <NSTextViewDelegate>
 {
     NSArray * tokenArray_;

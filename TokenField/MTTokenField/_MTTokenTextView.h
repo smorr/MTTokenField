@@ -27,5 +27,5 @@
 -(NSArray*)tokenArray;
 -(void) insertTokenForText:(NSString*)tokenText replacementRange:(NSRange)replacementRange;
 -(void)insertText:(id)aString replacementRange:(NSRange)replacementRange andBeginCompletion:(BOOL)beginCompletionFlag;
-
+-(void)removeTokenForText:(NSString*)tokenText;
 @end
