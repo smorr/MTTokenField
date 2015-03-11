@@ -22,7 +22,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    self.tokensForCompletion = [NSMutableArray arrayWithObjects:@"A very long keyword",@"Änger",@"Blatt",@"test",@"tiara",@"typhoon",@"trick",@"trigger",@"🕚tiger",@"@tickle",@"@waiting",@"@Followup",@"Walrus", nil];  
+    self.tokensForCompletion = [NSMutableArray arrayWithObjects:@"A very long keyword",@"Änger",@"Blatt",@"test",@"tiara",@"typhoon",@"trick",@"trigger",@"🕚tiger",@"@tickle",@"@waiting",@"@Followup",@"Walrus",@"Responde",@"Répondre", nil];
     
     [self.myTokenField setTokenArray:[NSArray arrayWithObject:@"test"]];
     

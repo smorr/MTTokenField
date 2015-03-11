@@ -30,7 +30,10 @@
 @property (retain)NSCharacterSet* tokenizingCharacterSet;
 + (id)sharedController;
 -(void)displayCompletionsForStem:(NSString*) stem forTextView:(NSTextView*)aTextView forRange:(NSRange)stemRange;
+-(void)displayCompletion:(NSString*)completion inTextView:(_MTTokenTextView*)aTextView;
 -(void)tearDownWindow;
 -(BOOL)isDisplayingCompletions;
+- (void)tableAction:(id)sender;
+-(void)insertText:(id)insertString;
 
 @end

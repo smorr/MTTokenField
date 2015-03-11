@@ -11,10 +11,14 @@
 @interface _MTTokenTextView : NSTextView
 -(void)insertTextWithoutCompletion:(id)aString;
 -(NSString*)completionStem;
+-(NSRange)rangeForCompletion;
 -(NSArray *)getCompletionsForStem:(NSString*)stem;
 -(void)setTokenArray:(NSArray*)tokenArray;
 -(NSArray*)tokenArray;
 -(void) insertTokenForText:(NSString*)tokenText replacementRange:(NSRange)replacementRange;
 -(void)insertText:(id)aString replacementRange:(NSRange)replacementRange andBeginCompletion:(BOOL)beginCompletionFlag;
+-(void)removeTokenForText:(NSString*)tokenText;
+-(void)abandonCompletion;
+@property (retain) NSMutableArray* components;
 
 @end

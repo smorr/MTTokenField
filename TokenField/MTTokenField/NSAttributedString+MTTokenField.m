@@ -27,4 +27,13 @@
     
     
 }
+-(NSString*)tokenStringAtIndex:(NSUInteger)index{
+    if (index < [self length]){
+        id attribute= [self attribute:NSAttachmentAttributeName atIndex:index effectiveRange:nil];
+        if ([attribute isKindOfClass:[_MTTokenTextAttachment class] ]){
+            return [(_MTTokenTextAttachment*)attribute title];
+        }
+    }
+    return nil;
+}
 @end
