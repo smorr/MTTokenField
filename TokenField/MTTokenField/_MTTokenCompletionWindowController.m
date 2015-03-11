@@ -22,7 +22,7 @@
 #import "_MTTokenCompletionTableView.h"
 #import "_MTTokenTextAttachment.h"
 #import "_MTTokenTextView.h"
-
+#import "KeyCodes.h"
 static _MTTokenCompletionWindowController* sharedController = nil;
 
 @implementation _MTTokenCompletionWindowController
@@ -63,7 +63,6 @@ static _MTTokenCompletionWindowController* sharedController = nil;
 	NSRect scrollFrame = NSMakeRect(0, 0, 200, 100);
     NSRect tableFrame = NSZeroRect;    
     tableFrame.size = NSMakeSize(0,0);
-       
     
     completionWindow = [[NSWindow alloc] initWithContentRect:scrollFrame styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
 	[completionWindow setWindowController:self];
@@ -73,6 +72,9 @@ static _MTTokenCompletionWindowController* sharedController = nil;
     [completionWindow setOneShot:YES];
     [completionWindow setReleasedWhenClosed:NO];
     [completionWindow setDelegate:self];
+    
+    //[completionWindow setParentWindow:[self.textView window]];
+   
     
     _MTTokenCompletionTableView *tableView = [[_MTTokenCompletionTableView alloc] initWithFrame:scrollFrame];
     self.tableView = tableView;
@@ -119,7 +121,10 @@ static _MTTokenCompletionWindowController* sharedController = nil;
 }
 
 -(void)chooseCompletion:(NSString*)completion forTextView:(_MTTokenTextView*)aTextView{
-    NSRange replacementRange = NSMakeRange(self.completionIndex, [aTextView selectedRange].location-self.completionIndex+ [aTextView selectedRange].length);
+    
+    
+    NSRange replacementRange = [aTextView rangeForCompletion];
+    //NSMakeRange(self.completionIndex, [aTextView selectedRange].location-self.completionIndex+ [aTextView selectedRange].length);
     [aTextView insertTokenForText:completion replacementRange:replacementRange]; 
  
 }
@@ -128,15 +133,20 @@ static _MTTokenCompletionWindowController* sharedController = nil;
     // method will display the completion in the textView , replacing currently displayed completion and adjust the selection
     // select the completed part of the completion.
     
-    NSRange replacementRange = NSMakeRange(self.completionIndex, [aTextView selectedRange].location-self.completionIndex+ [aTextView selectedRange].length);
-    NSString *insertionText = completion;
-    NSRange stemRangeInCompletion= [insertionText rangeOfString:self.completionStem options:NSCaseInsensitiveSearch];
+    NSRange replacementRange = aTextView.rangeForCompletion;
+    
+   // NSMakeRange(self.completionIndex, [aTextView selectedRange].location-self.completionIndex+ [aTextView selectedRange].length);
+    
     NSAttributedString * completionAttrString = [[NSAttributedString alloc] initWithString:completion attributes:[aTextView typingAttributes]];
     [[aTextView textStorage] replaceCharactersInRange:replacementRange withAttributedString:completionAttrString];
     [completionAttrString release];
+    if (!self.completionStem){
+        return;
+    }
+     NSRange stemRangeInCompletion= [completion rangeOfString:self.completionStem options:NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch];
     if (stemRangeInCompletion.location !=NSNotFound){
         NSUInteger selectionStart = self.completionIndex+stemRangeInCompletion.location+[self.completionStem length];
-        NSUInteger selectionLength = [insertionText length] -stemRangeInCompletion.location-[self.completionStem length];
+        NSUInteger selectionLength = [completion length] -stemRangeInCompletion.location-[self.completionStem length];
         NSRange newselection = NSMakeRange(selectionStart,selectionLength);
         [aTextView setSelectedRange:newselection];
     }
@@ -160,84 +170,135 @@ static _MTTokenCompletionWindowController* sharedController = nil;
     self.completionStem = [[stem mutableCopy] autorelease];
     self.textView = aTextView;
     self.completionsArray = [textView getCompletionsForStem:self.completionStem]; 
-    if ([self.completionsArray count]&&!completionWindow){
-       [self setupWindow];
-       [self.tableView reloadData];
-   
-        NSRect rect = [aTextView firstRectForCharacterRange:[aTextView selectedRange] actualRange:nil];
-        rect.origin.y -=5;
-        __block CGFloat screenMaxX = 0.0;
-        [[NSScreen screens] enumerateObjectsUsingBlock:^(NSScreen* aScreen, NSUInteger idx, BOOL *stop) {
-            if (NSPointInRect(rect.origin,[aScreen visibleFrame])){
-                *stop = YES;
-                screenMaxX = NSMaxX([aScreen visibleFrame]);
-            }
-        }];
+    if ([self.completionsArray count]){
         
-        rect.origin.x = MIN(rect.origin.x,screenMaxX-NSWidth([completionWindow frame]));
-        [completionWindow setFrameTopLeftPoint:rect.origin];
-        
-        [completionWindow orderFrontRegardless];
-        [[self.textView window] addChildWindow:completionWindow ordered:NSWindowAbove];
-
-        [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
-        NSString *insertionText =  [self.completionsArray count]?[self.completionsArray objectAtIndex:0]:self.completionStem;
-     
-        [self displayCompletion:insertionText inTextView:textView];
-    
-        // set up an event monitor to close the completion window
-        __block id blockself = self;
-        
-        _eventMonitor = [NSEvent addLocalMonitorForEventsMatchingMask:NSKeyDownMask|NSLeftMouseDownMask|NSRightMouseDownMask 
-                                                              handler:^NSEvent*(NSEvent *theEvent) {
+        if (completionWindow){
+            [self.tableView reloadData];
+            [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
+            NSString *insertionText =  [self.completionsArray count]?[self.completionsArray objectAtIndex:0]:self.completionStem;
             
-            if ([theEvent type]==NSKeyDown){
-                if ([theEvent modifierFlags] & NSCommandKeyMask){
+            [self displayCompletion:insertionText inTextView:textView];
+            
+        }
+        else{
+           [self setupWindow];
+           [self.tableView reloadData];
+       
+            NSRect rect = [aTextView firstRectForCharacterRange:[aTextView rangeForCompletion] actualRange:nil];
+            rect.origin.y -=5;
+            __block CGFloat screenMaxX = 0.0;
+            [[NSScreen screens] enumerateObjectsUsingBlock:^(NSScreen* aScreen, NSUInteger idx, BOOL *stop) {
+                if (NSPointInRect(rect.origin,[aScreen visibleFrame])){
+                    *stop = YES;
+                    screenMaxX = NSMaxX([aScreen visibleFrame]);
+                }
+            }];
+            
+            rect.origin.x = MIN(rect.origin.x,screenMaxX-NSWidth([completionWindow frame]));
+            [completionWindow setFrameTopLeftPoint:rect.origin];
+            
+            [completionWindow orderFrontRegardless];
+            [[self.textView window] addChildWindow:completionWindow ordered:NSWindowAbove];
+
+            [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
+            NSString *insertionText =  [self.completionsArray count]?[self.completionsArray objectAtIndex:0]:self.completionStem;
+         
+            [self displayCompletion:insertionText inTextView:textView];
+
+        
+            // set up an event monitor to close the completion window
+            __block id blockself = self;
+            
+            _eventMonitor = [NSEvent addLocalMonitorForEventsMatchingMask:NSKeyDownMask|NSLeftMouseDownMask|NSRightMouseDownMask
+                                                                  handler:^NSEvent*(NSEvent *theEvent) {
+                
+                if ([theEvent type]==NSKeyDown){
+                    if ([theEvent modifierFlags] & NSCommandKeyMask){
+                        [blockself tearDownWindow];
+                        return theEvent;
+                    }
+                    
+                    NSUInteger keyCode = [theEvent keyCode];
+                    switch (keyCode) {
+                        case KEY_ESCAPE:{
+                            [self tearDownWindow];
+                            [self.textView abandonCompletion];
+                            return nil;
+                            break;
+                        }
+                        case KEY_BACKSPACE:
+                        case KEY_DELETE:{
+                            if ([self.textView hasMarkedText]){
+                                [self.textView unmarkText];
+                                // return nil;
+                            }
+                            break;
+                        }
+                        case KEY_TAB:{
+                            NSInteger selectedRow = [self.tableView selectedRow];
+                            NSAssert(selectedRow >= 0 && selectedRow < [self.completionsArray count], @"Invalid Selected Row");
+                            [self chooseCompletion:[self.completionsArray objectAtIndex:selectedRow] forTextView:self.textView];
+                            [self tearDownWindow];
+                            [[self.textView window] sendEvent:theEvent];
+                            return nil;
+                            break;
+                        }
+                        case KEY_RETURN:
+                        case KEY_ENTER:
+                        //case KEY_RIGHTARROW:
+                        {
+                            NSInteger selectedRow = [self.tableView selectedRow];
+                            NSAssert(selectedRow >= 0 && selectedRow < [self.completionsArray count], @"Invalid Selected Row");
+                            [self chooseCompletion:[self.completionsArray objectAtIndex:selectedRow] forTextView:self.textView];
+                            [self tearDownWindow];
+                            
+                            return nil;
+                            break;
+                        }
+                        case KEY_DOWNARROW:{
+                            NSInteger selectedRow = [self.tableView selectedRow];
+                            if (selectedRow<[self.tableView numberOfRows]-1){
+                                [self.tableView selectRowIndexes:[NSIndexSet  indexSetWithIndex:selectedRow+1]byExtendingSelection:NO];
+                            }
+                            return nil;
+                        }
+                        case KEY_UPARROW:{
+                            NSInteger selectedRow = [self.tableView selectedRow];
+                            if (selectedRow>0){
+                                [self.tableView selectRowIndexes:[NSIndexSet  indexSetWithIndex:selectedRow-1]byExtendingSelection:NO];
+                            }
+                            return nil;
+                        }
+                    }
+                   
+                    if ([[theEvent characters] length] && [self.tokenizingCharacterSet characterIsMember:[[theEvent characters] characterAtIndex:0]]){
+                        NSInteger selectedRow = [self.tableView selectedRow];
+                        NSAssert(selectedRow >= 0 && selectedRow < [self.completionsArray count], @"Invalid Selected Row");
+                        [self chooseCompletion:[self.completionsArray objectAtIndex:selectedRow] forTextView:self.textView];
+                        [self tearDownWindow];
+
+                        return nil;
+                    }
+                    
+                    [[textView inputContext] handleEvent:theEvent];
+                    //[self interpretKeyEvents:[NSArray arrayWithObject:theEvent]];
+                      return nil;
+                  }
+                if ([theEvent window]==completionWindow){
+                    return theEvent;   
+                }
+                else{
                     [blockself tearDownWindow];
                     return theEvent;
                 }
-                if ([theEvent keyCode]==0x30 /*tab*/){
-                    NSInteger selectedRow = [self.tableView selectedRow];
-                    NSAssert(selectedRow >= 0 && selectedRow < [self.completionsArray count], @"Invalid Selected Row");
-                    [self chooseCompletion:[self.completionsArray objectAtIndex:selectedRow] forTextView:self.textView];
-                    [self tearDownWindow];
-                    [[self.textView window] sendEvent:theEvent];
-                    return nil;
- 
-                }
-                if ([theEvent keyCode]==0x24 /*return*/  || [theEvent keyCode] == 0x4C /*enter*/){
-                    NSInteger selectedRow = [self.tableView selectedRow];
-                    NSAssert(selectedRow >= 0 && selectedRow < [self.completionsArray count], @"Invalid Selected Row");
-                    [self chooseCompletion:[self.completionsArray objectAtIndex:selectedRow] forTextView:self.textView];
-                    [self tearDownWindow];
-
-                    return nil;
-                }
-                if ([self.tokenizingCharacterSet characterIsMember:[[theEvent characters] characterAtIndex:0]]){
-                    NSInteger selectedRow = [self.tableView selectedRow];
-                    NSAssert(selectedRow >= 0 && selectedRow < [self.completionsArray count], @"Invalid Selected Row");
-                    [self chooseCompletion:[self.completionsArray objectAtIndex:selectedRow] forTextView:self.textView];
-                    [self tearDownWindow];
-
-                    return nil;
-                }
-                [self interpretKeyEvents:[NSArray arrayWithObject:theEvent]];
-                  return nil;
-              }
-            if ([theEvent window]==completionWindow){
-                return theEvent;   
-            }
-            else{
-                [blockself tearDownWindow];
-                return theEvent;
-            }
-        }];
+            }];
+        }
     }
     else{
         if (completionWindow){
             [self tearDownWindow];
         }
-        [self displayCompletion:stem inTextView:textView];
+        
     }
     
     

@@ -28,6 +28,7 @@
 /* Begin PBXFileReference section */
 		327B8FD41AA77726000A85F1 /* NSColor+Shades.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSColor+Shades.h"; sourceTree = "<group>"; };
 		327B8FD51AA77726000A85F1 /* NSColor+Shades.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSColor+Shades.m"; sourceTree = "<group>"; };
+		325BED991AB0F8CB009E1A07 /* KeyCodes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyCodes.h; sourceTree = "<group>"; };
 		3298A71F1485C33400871718 /* TokenField.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TokenField.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3298A7231485C33400871718 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		3298A7261485C33400871718 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -137,6 +138,7 @@
 		329F06F814C736870090ECBE /* MTTokenField */ = {
 			isa = PBXGroup;
 			children = (
+				325BED991AB0F8CB009E1A07 /* KeyCodes.h */,
 				329F06F914C736870090ECBE /* _MTTokenCompletionTableView.h */,
 				329F06FA14C736870090ECBE /* _MTTokenCompletionTableView.m */,
 				329F06FB14C736870090ECBE /* _MTTokenCompletionWindow.h */,

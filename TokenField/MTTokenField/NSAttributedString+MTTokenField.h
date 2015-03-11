@@ -21,5 +21,5 @@
 
 @interface NSAttributedString (MTTokenField)
 -(NSUInteger)countOfMTTokensInRange:(NSRange)aRange;
-
+-(NSString*)tokenStringAtIndex:(NSUInteger)index;
 @end
