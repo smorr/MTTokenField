@@ -66,8 +66,13 @@
     if (self){
         [[self textStorage] setFont:[NSFont systemFontOfSize:11]];
         self.components = [NSMutableArray array];
+        self.nibAttributes = @{NSFontAttributeName:[NSFont systemFontOfSize:11]};
     }
     return self;
+}
+
+-(void)awakeFromNib{
+    self.nibAttributes = [self.textStorage attributesAtIndex:0 effectiveRange:nil];
 }
 -(NSArray *)getCompletionsForStem:(NSString*)stem{
     MTTokenField * controlView = (MTTokenField *)[self delegate];
@@ -205,6 +210,23 @@
     NSUInteger insertionIndex = [self selectedRange].location;
     if (insertionIndex !=NSNotFound){
         _MTTokenCompletionWindowController* completionController = [_MTTokenCompletionWindowController sharedController];
+        BOOL isShowingCompletions =[completionController completionWindow]!=nil;
+        
+        if (isShowingCompletions){
+            [completionController insertText:aString];
+        }
+        else{
+             NSRange  startingStemRange = [self rangeForCompletion];
+            NSUInteger selectionIndex = self.selectedRange.location - startingStemRange.location;
+            
+            NSMutableString * startingStem =[[[[[self textStorage] string] substringWithRange:startingStemRange] mutableCopy] autorelease];
+            [startingStem insertString:aString atIndex:selectionIndex];
+           // NSLog (@"Not showing completions -- setting raw text" );
+                   
+            [completionController insertText:startingStem];
+            
+        }
+        
         NSString * rawString = [aString respondsToSelector:@selector(string)]?[aString string]:aString;
  
         if (insertionIndex<=[[self textStorage] length]){
@@ -212,9 +234,11 @@
             NSString * stem =[[self completionStem]  stringByAppendingString:rawString];
         
             [completionController setTokenizingCharacterSet:[(MTTokenField*)[self delegate] tokenizingCharacterSet]];
-            [completionController displayCompletionsForStem:stem forTextView:self forRange:stemRange];
+            [completionController displayCompletionsForStem: completionController.rawStem forTextView:self forRange:stemRange];
             if([[completionController completionsArray] count]==0){
-                [super insertText:aString replacementRange:replacementRange];
+                if (!isShowingCompletions){
+                    [super insertText:aString replacementRange:replacementRange];
+                }
             }
             return;
         }
@@ -252,7 +276,6 @@
 }
 -(void)insertText:(id)aString replacementRange:(NSRange)replacementRange {
      if ([[_MTTokenCompletionWindowController sharedController] isDisplayingCompletions]){
-       // [[_MTTokenCompletionWindowController sharedController] insertText:aString];
          NSLog (@"3 MarkedRange: %@",NSStringFromRange([self markedRange]));
          [self insertText:aString replacementRange:replacementRange andBeginCompletion:YES];
          return;
@@ -270,9 +293,18 @@
 
 
 -(void)abandonCompletion{
-    if ([self selectedRange].location !=NSNotFound){
-        [[self textStorage] replaceCharactersInRange:self.selectedRange withString:@""];
+    //NSLog (@"abandon completion");
+    _MTTokenCompletionWindowController * completionController = [_MTTokenCompletionWindowController sharedController];
+    
+    if ([completionController isDisplayingCompletions]){
+        NSRange deleteRange = self.rangeForCompletion;
+        [self.textStorage replaceCharactersInRange:deleteRange withString:completionController.rawStem];
+        NSRange rangeForAttributes = self.rangeForCompletion;
+        [self.textStorage setAttributes:self.nibAttributes range:rangeForAttributes];
+        [self setSelectedRange:NSMakeRange(MIN(self.textStorage.length,rangeForAttributes.location+rangeForAttributes.length+1),0)];
+        [completionController tearDownWindow];
     }
+    
 }
 
 -(void)insertText:(id)aString{
@@ -405,18 +437,20 @@
 
 
 -(void)doCommandBySelector:(SEL)aSelector{
+    _MTTokenCompletionWindowController * completionController = [_MTTokenCompletionWindowController sharedController];
     if (aSelector == @selector(deleteBackward:)){
         
         NSArray * currentTokens = [self tokenArray];
         __unused NSUInteger ci = [self componentIndexForLocation:7];
         
-        if (self.selectedRange.length>0){
+        
+        if (self.selectedRange.length>0  ){
             NSRange deleteRange = self.selectedRange;
-            
             [self.textStorage replaceCharactersInRange:deleteRange withString:@""];
             [self setSelectedRange:NSMakeRange(deleteRange.location,0)];
-            [[_MTTokenCompletionWindowController sharedController] tearDownWindow];
-            
+            if (completionController.isDisplayingCompletions){
+                [self abandonCompletion];
+            }
         }else{
             if (self.selectedRange.location>0){
                 NSUInteger deleteIndex = self.selectedRange.location-1;
@@ -427,7 +461,8 @@
                     NSRange deleteRange = [[self.textStorage string] rangeOfComposedCharacterSequenceAtIndex:deleteIndex];
                     [self.textStorage replaceCharactersInRange:deleteRange withString:@""];
                     [self setSelectedRange:NSMakeRange(deleteRange.location,0)];
-                     [[_MTTokenCompletionWindowController sharedController] tearDownWindow];
+                    [completionController tearDownWindow];
+                    //[self abandonCompletion];
                 }
             }
         }
@@ -439,6 +474,12 @@
     }
 
     if (aSelector   == @selector(moveLeft:)){
+        
+        // reset displayed text to the rawstem
+        
+        
+        [self abandonCompletion];
+        
         NSRange selRange = [self selectedRange];
         if (selRange.location>0 && selRange.location<[[self textStorage] length]){
             if ([[self textStorage] attribute:NSAttachmentAttributeName atIndex:selRange.location-1 effectiveRange:nil]){

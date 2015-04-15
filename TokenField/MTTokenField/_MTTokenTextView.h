@@ -19,6 +19,7 @@
 #import <AppKit/AppKit.h>
 
 @interface _MTTokenTextView : NSTextView
+-(NSAttributedString*)tokenForString:(NSString*)aString;
 -(void)insertTextWithoutCompletion:(id)aString;
 -(NSString*)completionStem;
 -(NSRange)rangeForCompletion;
@@ -30,5 +31,6 @@
 -(void)removeTokenForText:(NSString*)tokenText;
 -(void)abandonCompletion;
 @property (retain) NSMutableArray* components;
+@property (retain) NSDictionary * nibAttributes;
 
 @end

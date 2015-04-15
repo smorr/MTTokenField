@@ -23,7 +23,8 @@
 typedef NS_ENUM(NSUInteger, MTTokenStyle) {
     kMTTokenStyleRounded = 0,
     kMTTokenStyleRectangular = 1,
-    kMTTokenStyleRoundedColor = 2
+    kMTTokenStyleRoundedColor = 2,
+    kMTTokenStyleRoundedLeftSideColor = 3
 };
 
 @protocol MTTokenFieldDelegate <NSObject,NSTextFieldDelegate>

@@ -22,7 +22,6 @@
 
 @interface _MTTokenCompletionWindowController : NSWindowController <NSTableViewDelegate,NSTableViewDataSource,NSWindowDelegate>
 {
-    NSWindow * completionWindow;
     __unsafe_unretained _MTTokenTextView * textView;
     id _eventMonitor;
     NSMutableString* completionStem_;
@@ -38,8 +37,11 @@
 @property (assign)NSUInteger completionIndex;
 @property (retain)_MTTokenCompletionTableView* tableView;
 @property (retain)NSCharacterSet* tokenizingCharacterSet;
+@property (retain)NSMutableString * rawStem;
+@property (retain) NSWindow * completionWindow;
+
 + (id)sharedController;
--(void)displayCompletionsForStem:(NSString*) stem forTextView:(NSTextView*)aTextView forRange:(NSRange)stemRange;
+-(BOOL)displayCompletionsForStem:(NSString*) stem forTextView:(NSTextView*)aTextView forRange:(NSRange)stemRange;
 -(void)displayCompletion:(NSString*)completion inTextView:(_MTTokenTextView*)aTextView;
 -(void)tearDownWindow;
 -(BOOL)isDisplayingCompletions;

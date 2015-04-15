@@ -32,12 +32,12 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    self.tokensForCompletion = [NSMutableArray arrayWithObjects:@"A very long keyword",@"Änger",@"Blatt",@"test",@"tiara",@"typhoon",@"trick",@"trigger",@"🕚tiger",@"@tickle",@"@waiting",@"@Followup",@"Walrus",@"Responde",@"Répondre", nil];
+    self.tokensForCompletion = [NSMutableArray arrayWithObjects:@"Blatt",@"test",@"tiara",@"typhoon",@"trick",@"trigger",@"🕚tiger",@"@tickle",@"@Action",@"apt",@"apple-gala",@"apple-fuji",@"@waiting",@"@Followup",@"Walrus",@"Responde",@"Répondre", nil];
     
-    [self.myTokenField setTokenArray:[NSArray arrayWithObject:@"test"]];
-    
+    [self.myTokenField setTokenArray:@[]];
+     self.option = 1;
     [self.tableView reloadData];
-        
+   
     
     
     
