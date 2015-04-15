@@ -120,6 +120,9 @@
     if ([string rangeOfString:@"Blatt"].location!=NSNotFound){
         return kMTTokenStyleRounded;
     }
+    if ([string hasPrefix:@"@"]){
+        return kMTTokenStyleRoundedLeftSideColor;
+    }
 
     return kMTTokenStyleRectangular;
 }

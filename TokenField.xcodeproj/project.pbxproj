@@ -26,9 +26,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		325BED991AB0F8CB009E1A07 /* KeyCodes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyCodes.h; sourceTree = "<group>"; };
 		327B8FD41AA77726000A85F1 /* NSColor+Shades.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSColor+Shades.h"; sourceTree = "<group>"; };
 		327B8FD51AA77726000A85F1 /* NSColor+Shades.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSColor+Shades.m"; sourceTree = "<group>"; };
-		325BED991AB0F8CB009E1A07 /* KeyCodes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyCodes.h; sourceTree = "<group>"; };
 		3298A71F1485C33400871718 /* TokenField.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TokenField.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3298A7231485C33400871718 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		3298A7261485C33400871718 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -61,6 +61,7 @@
 		329F070914C736870090ECBE /* MTTokenFieldDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTTokenFieldDelegate.h; sourceTree = "<group>"; };
 		329F071914C879D50090ECBE /* NSAttributedString+MTTokenField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+MTTokenField.h"; sourceTree = "<group>"; };
 		329F071A14C879D60090ECBE /* NSAttributedString+MTTokenField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+MTTokenField.m"; sourceTree = "<group>"; };
+		32F53F2A1ADEEB6200A8FF08 /* SampleMTTokenField.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SampleMTTokenField.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +115,7 @@
 		3298A7291485C33400871718 /* TokenField */ = {
 			isa = PBXGroup;
 			children = (
+				32F53F2A1ADEEB6200A8FF08 /* SampleMTTokenField.png */,
 				329F06F814C736870090ECBE /* MTTokenField */,
 				3298A7351485C33400871718 /* MTAppDelegate.h */,
 				3298A7381485C33400871718 /* MainMenu.xib */,
