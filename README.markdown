@@ -1,7 +1,7 @@
 MTTokenField is a replacement for AppKit's NSTokenField
 
 ##Rationale
-NSToken field has several limitations for autocompletion and display of tokens.  
+NSTokenField has several limitations for autocompletion and display of tokens.  
 * Autocompletion handling non-alphanumeric prefixes for suggestions.   In MailTags, we wanted users to be able to omit prefixes to token that were not Alphanumeric in nature (eg symbols such as '@' and emoji)  so that when they typed Act... the keyword '@Action' would be presented as an autocompletion option.
 * Display of different colours and token styles for tokenized strings and the autocompletion suggestions. 
 
